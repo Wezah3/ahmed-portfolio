@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ahmed Mostafa — Portfolio</title>
+
+  <style>
+    :root{
+      --bg0:#040404; --bg1:#0b0b0b;
+      --panel:rgba(255,255,255,.045);
+      --stroke:rgba(246,215,123,.18);
+      --stroke2:rgba(255,255,255,.10);
+      --gold1:#f6d77b; --gold2:#b8892a;
+      --white:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.62);
+      --shadow:0 24px 120px rgba(0,0,0,.82);
+      --r:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--white);
+      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(1200px 760px at 18% 10%, rgba(246,215,123,.12), transparent 60%),
+        radial-gradient(1100px 780px at 85% 18%, rgba(184,137,42,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* Top bar */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(246,215,123,.16);
+      user-select:none;
+    }
+    .nav-inner{
+      max-width:1220px; margin:0 auto;
+      padding:14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      font-weight:950;
+      letter-spacing:10px;
+      text-transform:uppercase;
+      font-size:14px;
+      background: linear-gradient(90deg, var(--gold1), #fff, var(--gold2));
+      -webkit-background-clip:text; background-clip:text;
+      color:transparent;
+      user-select:none;
+      opacity:.95;
+    }
+    .navlinks{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      max-width:820px;
+    }
+    .navlinks a{
+      color:rgba(255,255,255,.76);
+      text-decoration:none;
+      font-size:12px;
+      padding:8px 10px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+      transition:.2s;
+      white-space:nowrap;
+      user-select:none;
+    }
+    .navlinks a:hover{
+      border-color: rgba(246,215,123,.40);
+      box-shadow:0 0 70px rgba(246,215,123,.10);
+      transform: translateY(-1px);
+    }
+
+    /* Page */
+    .wrap{ max-width:1220px; margin:0 auto; padding:18px 16px 70px; }
+
+    /* Hero */
+    .hero{
+      border-radius: 28px;
+      border:1px solid rgba(246,215,123,.22);
+      background:
+        radial-gradient(900px 300px at 25% 10%, rgba(246,215,123,.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      padding:24px 22px;
+      position:relative;
+      overflow:hidden;
+      user-select:none;
+    }
+    .hero::after{
+      content:""; position:absolute; inset:-40%;
+      background: linear-gradient(120deg,
+        transparent 35%,
+        rgba(246,215,123,.14) 45%,
+        rgba(255,255,255,.10) 50%,
+        rgba(184,137,42,.12) 55%,
+        transparent 65%);
+      transform: translateX(-30%) rotate(12deg);
+      animation: foil 6.5s ease-in-out infinite;
+      pointer-events:none;
+      opacity:.55;
+    }
+    @keyframes foil{
+      0%{ transform: translateX(-35%) rotate(12deg); opacity:.16; }
+      45%{ opacity:.55; }
+      100%{ transform: translateX(35%) rotate(12deg); opacity:.16; }
+    }
+
+    .hero h1{
+      margin:0;
+      font-size:56px;
+      font-weight:950;
+      letter-spacing:14px;
+      text-transform:uppercase;
+      background: linear-gradient(90deg, var(--gold1), #fff, var(--gold2));
+      -webkit-background-clip:text; background-clip:text;
+      color:transparent;
+      filter: drop-shadow(0 22px 70px rgba(246,215,123,.12));
+      position:relative; z-index:2;
+    }
+    .hero .role{
+      margin:12px 0 0;
+      font-size:14px;
+      letter-spacing:6px;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.72);
+      font-weight:900;
+      position:relative; z-index:2;
+    }
+    .hero .tagline{
+      margin:10px 0 0;
+      color: rgba(255,255,255,.78);
+      line-height:1.2;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:6px;
+      text-transform:uppercase;
+      position:relative; z-index:2;
+    }
+
+    @media (max-width:900px){
+      .hero h1{ font-size:38px; letter-spacing:9px; }
+      .hero .tagline{ font-size:16px; letter-spacing:4px; }
+      .hero .role{ font-size:12px; letter-spacing:4px; }
+    }
+
+    /* Sections */
+    .section{
+      margin-top:18px;
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 18px 70px rgba(0,0,0,.58);
+      overflow:hidden;
+    }
+    .section-head{
+      padding:14px 16px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.18);
+      user-select:none;
+    }
+    .section-head h2{ margin:0; font-size:14px; font-weight:950; letter-spacing:1px; }
+    .section-head .hint{ color:var(--muted); font-size:12px; display:flex; gap:10px; align-items:center; }
+
+    .subhead{
+      margin:14px 16px 10px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      user-select:none;
+    }
+    .subhead h3{ margin:0; font-size:12.5px; font-weight:900; letter-spacing:.6px; color: rgba(255,255,255,.88); }
+    .subhead .mini{ color:rgba(255,255,255,.52); font-size:12px; }
+
+    /* Grid */
+    .grid{
+      padding: 0 16px 16px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+      align-items:start;
+    }
+
+    /* Cards */
+    .card{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      cursor:pointer;
+      transition:.18s;
+      box-shadow: 0 18px 50px rgba(0,0,0,.50);
+      position:relative;
+      align-self:start;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(246,215,123,.34);
+      box-shadow: 0 26px 90px rgba(0,0,0,.76), 0 0 80px rgba(246,215,123,.08);
+    }
+
+    /* Default square thumb */
+    .thumb{
+      display:flex; align-items:center; justify-content:center;
+      padding:12px;
+      background:
+        radial-gradient(420px 240px at 50% 20%, rgba(246,215,123,.10), transparent 60%),
+        rgba(0,0,0,.25);
+      aspect-ratio: 1/1;
+    }
+    /* Free ratio (mixed sizes) */
+    .thumb.free{ aspect-ratio:auto; min-height:120px; }
+
+    /* Landing Pages: auto height */
+    .thumb.tall{
+      aspect-ratio:auto !important;
+      padding:12px;
+    }
+    .thumb.tall img{
+      width:100%;
+      height:auto;
+      max-height:none;
+      object-fit:contain;
+    }
+
+    .thumb img, .thumb video{
+      max-width:100%; max-height:100%;
+      width:auto; height:auto;
+      object-fit:contain;
+      border-radius:12px;
+      background:transparent;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,.70));
+      -webkit-user-drag:none;
+      user-select:none;
+      pointer-events:none; /* important: prevent direct save interaction */
+    }
+
+    .meta{
+      padding:10px 12px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      user-select:none;
+    }
+    .name{ font-weight:900; font-size:12px; opacity:.92; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .tag{
+      font-size:11px; padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(246,215,123,.18);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.74);
+      white-space:nowrap;
+    }
+
+    /* Viewer */
+    .viewer{
+      position:fixed; inset:0; z-index:9999;
+      display:none; align-items:center; justify-content:center;
+      padding:18px;
+      background: rgba(0,0,0,.86);
+      backdrop-filter: blur(16px);
+    }
+    .viewer.show{ display:flex; }
+    .vbox{
+      width:min(1200px, 96vw);
+      height:min(860px, 92vh);
+      border-radius: 26px;
+      border:1px solid rgba(246,215,123,.24);
+      background:
+        radial-gradient(1000px 520px at 25% 15%, rgba(246,215,123,.16), transparent 60%),
+        rgba(10,10,10,.92);
+      box-shadow: 0 40px 160px rgba(0,0,0,.92);
+      overflow:hidden;
+      position:relative;
+    }
+    .vtop{
+      position:absolute; top:0; left:0; right:0;
+      padding:14px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background: linear-gradient(180deg, rgba(0,0,0,.78), transparent);
+      z-index:2;
+      user-select:none;
+    }
+    .vtitle .t{ font-weight:950; letter-spacing:1px; font-size:14px; }
+    .vtitle .s{ color:var(--muted); font-size:12px; margin-top:4px; }
+    .vactions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .btn{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: var(--white);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:900;
+      transition:.2s;
+      user-select:none;
+    }
+    .btn:hover{
+      border-color: rgba(246,215,123,.40);
+      box-shadow:0 0 70px rgba(246,215,123,.12);
+      transform: translateY(-1px);
+    }
+    .vbody{
+      position:absolute; inset:0;
+      padding:70px 16px 16px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .vbody img, .vbody video{
+      max-width: 95vw; max-height: 85vh;
+      width:auto; height:auto;
+      object-fit:contain;
+      border-radius:14px;
+      background:transparent;
+      filter: drop-shadow(0 34px 80px rgba(0,0,0,.78));
+      -webkit-user-drag:none;
+      user-select:none;
+    }
+    .vbody video{ background:#000; outline:none; }
+
+    /* App Events Tabs */
+    .events-tabs {
+      padding: 14px 16px 0;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(246,215,123,.25) transparent;
+      user-select:none;
+    }
+    .events-tabs::-webkit-scrollbar { height: 8px; }
+    .events-tabs::-webkit-scrollbar-thumb {
+      background: rgba(246,215,123,.18);
+      border-radius: 999px;
+    }
+    .tabbtn{
+      flex: 0 0 auto;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.78);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: 12px;
+      letter-spacing: .4px;
+      transition: .18s;
+      white-space: nowrap;
+      user-select:none;
+    }
+    .tabbtn:hover{
+      border-color: rgba(246,215,123,.40);
+      box-shadow: 0 0 70px rgba(246,215,123,.10);
+      transform: translateY(-1px);
+    }
+    .tabbtn.active{
+      border-color: rgba(246,215,123,.55);
+      color: rgba(255,255,255,.94);
+      background: radial-gradient(400px 140px at 30% 20%, rgba(246,215,123,.16), transparent 60%),
+                  rgba(255,255,255,.05);
+    }
+    .event-panel{ padding: 14px 0 6px; }
+    .event-group{ margin-top: 14px; }
+    .event-group:first-child{ margin-top: 0; }
+    .event-group-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:10px;
+      margin: 0 16px 10px;
+      user-select:none;
+    }
+    .event-group-title h3{
+      margin:0;
+      font-size: 12.5px;
+      font-weight: 950;
+      letter-spacing: .6px;
+      color: rgba(255,255,255,.90);
+    }
+    .event-group-title span{
+      font-size: 12px;
+      color: rgba(255,255,255,.52);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">Ahmed Mostafa</div>
+      <div class="navlinks" id="navlinks"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>AHMED MOSTAFA</h1>
+      <div class="role">QA DESIGNER</div>
+      <div class="tagline">PORTFOLIO</div>
+    </div>
+
+    <div id="sections"></div>
+  </div>
+
+  <!-- Viewer -->
+  <div class="viewer" id="viewer" aria-hidden="true">
+    <div class="vbox">
+      <div class="vtop">
+        <div class="vtitle">
+          <div class="t" id="vT">Preview</div>
+          <div class="s" id="vS">Fullscreen</div>
+        </div>
+        <div class="vactions">
+          <button class="btn" id="vPrev">Prev</button>
+          <button class="btn" id="vNext">Next</button>
+          <button class="btn" id="vClose">Close</button>
+        </div>
+      </div>
+      <div class="vbody" id="vBody"></div>
+    </div>
+  </div>
+
+<script>
+  /* Helpers */
+  const seq = (prefix, count, ext, pad=2) => {
+    const out = [];
+    for(let i=1;i<=count;i++){
+      const n = String(i).padStart(pad,"0");
+      out.push(`${prefix}-${n}.${ext}`);
+    }
+    return out;
+  };
+
+  /* CONFIG */
+  const CONFIG = [
+    { id:"s1",  title:"01 — Customized Avatars", hint:"Animated WebP • Transparent • Click to open fullscreen",
+      folder:"assets/01-customized-avatars/", items: seq("avatar", 48, "webp"), type:"image", free:false },
+    { id:"s2",  title:"02 — Customized Background", hint:"WebP • Original ratio • (GIF removed)",
+      folder:"assets/02-customized-background/", items: seq("profile-bg", 9, "webp"), type:"image", free:true },
+    { id:"s3",  title:"03 — Customized Profile Frame", hint:"750×120 WebP • UI strips",
+      folder:"assets/03-customized-profile-frame/", items: seq("profile-frame", 14, "webp"), type:"image", free:true },
+    { id:"s4",  title:"04 — Customized Gift", hint:"MP4 • Click for fullscreen",
+      folder:"assets/04-customized-gift/", items: seq("customized-gift", 9, "mp4"), type:"video", free:true },
+    { id:"s5",  title:"05 — Hot Gift", hint:"MP4 • Click for fullscreen",
+      folder:"assets/05-hot-gift/", items: seq("hot-gift", 14, "mp4"), type:"video", free:true },
+    { id:"s6",  title:"06 — Official Elements", hint:"WebP • Mixed sizes",
+      folder:"assets/06-official-elements/", items: ["50-01.webp","50-003.webp","50-04.webp"], type:"image", free:true },
+    { id:"s7",  title:"07 — Audio Room Elements", hint:"Seat Covers + Speech Animations",
+      folder:"assets/07-audio-room-elements/",
+      groups:[
+        { sub:"Seat Cover", type:"image", free:false, items: seq("seat-cover", 9, "webp") },
+        { sub:"Speech Animation", type:"image", free:false, items: seq("speech-animation", 11, "webp") }
+      ]},
+    { id:"s8",  title:"08 — Audio Room Background", hint:"Portrait • Original ratio",
+      folder:"assets/08-audio-room-background/", items: ["7-01.webp","8.webp","10-01.webp"], type:"image", free:true },
+    { id:"s9",  title:"09 — App Events", hint:"Events as horizontal tabs • grouped deliverables inside each event",
+      folder:"assets/09-app-events/", appEvents:true },
+    { id:"s10", title:"10 — Live Border", hint:"WebP • Original ratio",
+      folder:"assets/10-live-border/", items: seq("live-border", 3, "webp"), type:"image", free:true },
+    { id:"s11", title:"11 — Dynamic Set", hint:"Avatars + Medals",
+      folder:"assets/11-dynamic-set/",
+      groups:[
+        { sub:"Avatars", type:"image", free:false, items: seq("avatar", 4, "webp") },
+        { sub:"Medals", type:"image", free:false, items: seq("medal", 5, "webp") }
+      ]},
+    { id:"s12", title:"12 — Room Decoration", hint:"WebP",
+      folder:"assets/12-room-decoration/", items: ["room-decoration.webp"], type:"image", free:true },
+    { id:"s13", title:"13 — H5 Head Image & Banners", hint:"Mixed sizes • WebP",
+      folder:"assets/13-h5-head-banners/",
+      groups:[
+        { sub:"Banners", type:"image", free:true, items: seq("banner", 6, "webp") },
+        { sub:"Head Images", type:"image", free:true, items: seq("head-image", 4, "webp") }
+      ]},
+    { id:"s14", title:"14 — Chat Border", hint:"PNG • Transparent",
+      folder:"assets/14-chat-border/", items: seq("chat-border", 6, "png"), type:"image", free:true },
+    { id:"s15", title:"15 — H5 Landing Pages", hint:"PNG • Tall pages • Auto height (no empty space)",
+      folder:"assets/15-h5-landing-pages/", items: seq("landing", 5, "png"), type:"image", free:true, mode:"tall" },
+    { id:"s16", title:"16 — Propaganda Video", hint:"MP4",
+      folder:"assets/16-propaganda-video/", items: seq("propaganda-video", 9, "mp4"), type:"video", free:true },
+    { id:"s17", title:"17 — Ceremony Video", hint:"MP4",
+      folder:"assets/17-ceremony-video/", items: seq("ceremony-video", 11, "mp4"), type:"video", free:true },
+  ];
+
+  /* Viewer */
+  const viewer = document.getElementById("viewer");
+  const vBody  = document.getElementById("vBody");
+  const vT     = document.getElementById("vT");
+  const vS     = document.getElementById("vS");
+  let vItems = [];
+  let vIndex = 0;
+
+  function openViewer(items, idx, title, sub){
+    vItems = items;
+    vIndex = idx;
+    vT.textContent = title || "Preview";
+    vS.textContent = sub || "Fullscreen";
+    renderViewer();
+    viewer.classList.add("show");
+    viewer.setAttribute("aria-hidden","false");
+  }
+  function closeViewer(){
+    viewer.classList.remove("show");
+    viewer.setAttribute("aria-hidden","true");
+    vBody.innerHTML = "";
+  }
+  function renderViewer(){
+    const it = vItems[vIndex];
+    if(!it) return;
+    vBody.innerHTML = "";
+    if(it.type==="video"){
+      const vid = document.createElement("video");
+      vid.src = it.src;
+      vid.controls = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.autoplay = true;
+      vid.muted = true;
+      vid.preload = "metadata";
+
+      // ✅ Anti-download UI (deterrent)
+      vid.setAttribute("controlsList", "nodownload noplaybackrate");
+      vid.setAttribute("disablePictureInPicture", "");
+
+      vBody.appendChild(vid);
+    } else {
+      const img = document.createElement("img");
+      img.src = it.src;
+      img.alt = it.name || "asset";
+      vBody.appendChild(img);
+    }
+  }
+  function next(){ vIndex = (vIndex+1) % vItems.length; renderViewer(); }
+  function prev(){ vIndex = (vIndex-1+vItems.length) % vItems.length; renderViewer(); }
+
+  document.getElementById("vClose").onclick = closeViewer;
+  document.getElementById("vNext").onclick  = next;
+  document.getElementById("vPrev").onclick  = prev;
+
+  document.addEventListener("keydown",(e)=>{
+    if(e.key==="Escape") closeViewer();
+    if(viewer.classList.contains("show")){
+      if(e.key==="ArrowRight") next();
+      if(e.key==="ArrowLeft") prev();
+    }
+  });
+  viewer.addEventListener("click",(e)=>{ if(e.target===viewer) closeViewer(); });
+
+  /* Rendering helpers */
+  const sectionsRoot = document.getElementById("sections");
+  const navLinksRoot = document.getElementById("navlinks");
+  function el(tag, cls){ const x=document.createElement(tag); if(cls) x.className=cls; return x; }
+
+  function buildNav(){
+    const pick = ["s1","s2","s3","s9","s15","s16","s17"];
+    pick.forEach(id=>{
+      const sec = CONFIG.find(x=>x.id===id);
+      if(!sec) return;
+      const a = document.createElement("a");
+      a.href = `#${sec.id}`;
+      a.textContent = (sec.title.split(" — ")[1] || sec.title).trim();
+      navLinksRoot.appendChild(a);
+    });
+  }
+
+  function addCard(gridEl, it, allItems, idx, titleTag, mode){
+    const card = el("div","card");
+    const thumb = el("div","thumb"+(it.free?" free":"")+(mode==="tall"?" tall":""));
+    const meta = el("div","meta");
+
+    if(it.type==="video"){
+      const v = document.createElement("video");
+      v.src = it.src;
+      v.muted = true;
+      v.playsInline = true;
+      v.preload = "metadata";
+
+      // ✅ Anti-download UI (deterrent)
+      v.setAttribute("controlsList", "nodownload noplaybackrate");
+      v.setAttribute("disablePictureInPicture", "");
+      v.controls = false;
+
+      thumb.appendChild(v);
+    } else {
+      const img = document.createElement("img");
+      img.src = it.src;
+      img.alt = it.name;
+      thumb.appendChild(img);
+    }
+
+    const name = el("div","name");
+    name.textContent = it.name;
+
+    const tag = el("div","tag");
+    tag.textContent = titleTag;
+
+    meta.appendChild(name);
+    meta.appendChild(tag);
+
+    card.appendChild(thumb);
+    card.appendChild(meta);
+
+    card.onclick = ()=> openViewer(allItems, idx, titleTag, it.name);
+    gridEl.appendChild(card);
+  }
+
+  function renderSectionShell(sec){
+    const wrap = el("div","section");
+    wrap.id = sec.id;
+
+    const head = el("div","section-head");
+    const h2 = document.createElement("h2");
+    h2.textContent = sec.title;
+
+    const right = el("div","hint");
+    right.textContent = sec.hint;
+
+    head.appendChild(h2);
+    head.appendChild(right);
+    wrap.appendChild(head);
+
+    return wrap;
+  }
+
+  function renderSimpleSection(sec){
+    const wrap = renderSectionShell(sec);
+    const grid = el("div","grid");
+    wrap.appendChild(grid);
+
+    const items = sec.items.map(name=>({
+      type: sec.type,
+      src: sec.folder + name,
+      name,
+      free: !!sec.free
+    }));
+
+    const tag = (sec.type || "asset").toUpperCase();
+    items.forEach((it, idx)=> addCard(grid, it, items, idx, tag, sec.mode));
+    return wrap;
+  }
+
+  function renderGroupedSection(sec){
+    const wrap = renderSectionShell(sec);
+
+    sec.groups.forEach(g=>{
+      const sub = el("div","subhead");
+      const h3 = document.createElement("h3");
+      h3.textContent = g.sub;
+      const mini = el("div","mini");
+      mini.textContent = "Click for fullscreen";
+      sub.appendChild(h3);
+      sub.appendChild(mini);
+      wrap.appendChild(sub);
+
+      const grid = el("div","grid");
+      wrap.appendChild(grid);
+
+      const items = g.items.map(name=>({
+        type: g.type,
+        src: sec.folder + name,
+        name,
+        free: !!g.free
+      }));
+
+      items.forEach((it, idx)=> addCard(grid, it, items, idx, g.sub.toUpperCase()));
+    });
+
+    return wrap;
+  }
+
+  /* App Events Tabs */
+  const APP_EVENTS = [
+    { title:"Alaadin", folder:"alaadin" },
+    { title:"Ambassador", folder:"ambassador" },
+    { title:"Ancient Egyptian", folder:"ancient-egyptian" },
+    { title:"Annual Gala", folder:"annual-gala" },
+    { title:"Brave", folder:"brave" },
+    { title:"Country", folder:"Country" }, // change to "country" if your folder is lowercase
+    { title:"Emperor", folder:"emperor" },
+    { title:"Football", folder:"football" },
+    { title:"Formula1", folder:"formula1" },
+    { title:"Halloween", folder:"halloween" },
+    { title:"Lion", folder:"lion" },
+    { title:"Money", folder:"money" },
+    { title:"MWL", folder:"mwl" },
+    { title:"MWL 2", folder:"mwl-2" },
+    { title:"Oscar", folder:"oscar" },
+    { title:"Pirates", folder:"pirates" },
+    { title:"Ramadan", folder:"ramadan" },
+    { title:"War", folder:"war" },
+    { title:"WWE", folder:"wwe" }
+  ];
+
+  const EVENT_TYPES = [
+    { label:"Avatars", prefix:"avatar", ext:"webp" },
+    { label:"Medals", prefix:"medal", ext:"webp" },
+    { label:"Minicard Backgrounds", prefix:"minicard-background", ext:"webp" },
+    { label:"Profile Frames", prefix:"profile-frame", ext:"webp" },
+    { label:"Honorary Titles", prefix:"honorary-title", ext:"webp" }
+  ];
+
+  const PROBE_MAX = 20;
+
+  function imgExists(src){
+    return new Promise(resolve=>{
+      const img = new Image();
+      img.onload = ()=> resolve(true);
+      img.onerror = ()=> resolve(false);
+      img.src = src;
+    });
+  }
+
+  async function scanType(secFolder, eventFolder, t){
+    const checks = [];
+    const candidates = [];
+    for(let i=1;i<=PROBE_MAX;i++){
+      const n = String(i).padStart(2,"0");
+      const file = `${t.prefix}-${n}.${t.ext}`;
+      const src = `${secFolder}${eventFolder}/${file}`;
+      candidates.push({ type:"image", src, name:file, free:true });
+      checks.push(imgExists(src));
+    }
+    const results = await Promise.all(checks);
+    return candidates.filter((_, idx)=> results[idx]);
+  }
+
+  function renderAppEventsSection(sec){
+    const wrap = renderSectionShell(sec);
+
+    const tabs = el("div","events-tabs");
+    const panel = el("div","event-panel");
+
+    wrap.appendChild(tabs);
+    wrap.appendChild(panel);
+
+    let activeIndex = 0;
+
+    function setActive(idx){
+      activeIndex = idx;
+      [...tabs.querySelectorAll(".tabbtn")].forEach((b,i)=>{
+        b.classList.toggle("active", i===activeIndex);
+      });
+      loadEvent(APP_EVENTS[activeIndex]);
+    }
+
+    async function loadEvent(ev){
+      panel.innerHTML = "";
+
+      // Build groups
+      for(const t of EVENT_TYPES){
+        const items = await scanType(sec.folder, ev.folder, t);
+        if(!items.length) continue;
+
+        const titleRow = el("div","event-group-title");
+        const h3 = document.createElement("h3");
+        h3.textContent = `${ev.title} — ${t.label}`;
+        const s = document.createElement("span");
+        s.textContent = "Click to open fullscreen";
+        titleRow.appendChild(h3);
+        titleRow.appendChild(s);
+
+        const grid = el("div","grid");
+        items.forEach((it, idx)=>{
+          addCard(grid, it, items, idx, t.label.toUpperCase(), "free");
+        });
+
+        const block = el("div","event-group");
+        block.appendChild(titleRow);
+        block.appendChild(grid);
+        panel.appendChild(block);
+      }
+
+      if(!panel.children.length){
+        const empty = document.createElement("div");
+        empty.style.padding = "16px";
+        empty.style.color = "rgba(255,255,255,.65)";
+        empty.style.fontWeight = "900";
+        empty.textContent = `No assets found in: ${ev.folder}. Check naming (avatar-01.webp, medal-01.webp, ...)`;
+        panel.appendChild(empty);
+      }
+    }
+
+    // Build tabs
+    APP_EVENTS.forEach((ev, idx)=>{
+      const b = document.createElement("button");
+      b.className = "tabbtn" + (idx===0 ? " active" : "");
+      b.textContent = ev.title;
+      b.onclick = ()=> setActive(idx);
+      tabs.appendChild(b);
+    });
+
+    // Load first
+    loadEvent(APP_EVENTS[0]);
+
+    return wrap;
+  }
+
+  function renderAll(){
+    buildNav();
+
+    CONFIG.forEach(sec=>{
+      let node;
+      if(sec.appEvents) node = renderAppEventsSection(sec);
+      else if(sec.groups) node = renderGroupedSection(sec);
+      else node = renderSimpleSection(sec);
+
+      sectionsRoot.appendChild(node);
+    });
+  }
+
+  renderAll();
+</script>
+
+<!-- =========================
+     Anti-save / Anti-copy (deterrent)
+     ========================= -->
+<script>
+  // Disable right click / drag / select (deterrent)
+  document.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("dragstart", e => e.preventDefault());
+  document.addEventListener("selectstart", e => e.preventDefault());
+
+  // Block common DevTools shortcuts (deterrent)
+  document.addEventListener("keydown", (e) => {
+    const k = (e.key || "").toLowerCase();
+    const ctrl = e.ctrlKey || e.metaKey; // meta for mac
+    const shift = e.shiftKey;
+    const alt = e.altKey;
+
+    if (e.key === "F12") { e.preventDefault(); e.stopPropagation(); return; }
+    if (ctrl && k === "u") { e.preventDefault(); e.stopPropagation(); return; }
+    if (ctrl && shift && (k === "i" || k === "j" || k === "c")) { e.preventDefault(); e.stopPropagation(); return; }
+    if (e.metaKey && alt && k === "i") { e.preventDefault(); e.stopPropagation(); return; }
+  }, { capture: true });
+</script>
+
+</body>
+</html>
